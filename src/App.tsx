@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FormularioRexistroUser from './componentes/FormularioRexistroUser';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -24,10 +25,12 @@ function App() {
       return;
     }
 
+
     const formData = new FormData();
-    formData.append('avatar', selectedFile);
+    formData.append('avatar', selectedFile);// AQUÍ INTRODUCIMOS O FICHEIRO QUE QUEREMOS ENVIAR
 
     Object.entries(withInputs).forEach(([key, value]) => {
+      console.log("key e value",key,value)
       formData.append(key, value);
     });
 
@@ -51,14 +54,12 @@ function App() {
   return (
     <div>
       <h2>Subida de Archivos con React y Hooks</h2>
-      <form method="post" onSubmit={handleUpload}>
-        <input type="text" name="dato1" placeholder="Introduce dato1" onChange={handleInputs} />
-        <input type="text" name="dato2" placeholder="Introduce dato2" onChange={handleInputs} />
-        <input type="file" name="avatar" onChange={handleFileChange} />
-        <button type="submit" disabled={isUploading}>
-          {isUploading ? 'Subiendo...' : 'Enviar'}
-        </button>
-      </form>
+      <FormularioRexistroUser
+       handleFileChange={handleFileChange} 
+       handleInputs={handleInputs}
+       handleUpload={handleUpload} 
+       isUploading={isUploading}/>
+      
     </div>
   );
 }
