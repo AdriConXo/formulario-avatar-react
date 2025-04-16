@@ -3,12 +3,24 @@ import FormularioRexistroUser from './componentes/FormularioRexistroUser';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selecteURL,setSelectedURL] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [withInputs, setInputs] = useState<{ [key: string]: string }>({});
+ 
+ 
 
+  const cambioImaxen = (event: React.ChangeEvent<HTMLInputElement>) =>{
+    if (event.target.files?.[0]) {
+     // AGREGO IMAXEN CONVERTIDA
+      setSelectedURL(URL.createObjectURL(event.target.files[0]));
+    }
+  }
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+   
     if (event.target.files?.[0]) {
       setSelectedFile(event.target.files[0]);
+      // AGREGO IMAXEN CONVERTIDA
+      setSelectedURL(URL.createObjectURL(event.target.files[0]));
     }
   };
 
@@ -53,6 +65,12 @@ function App() {
 
   return (
     <div>
+      <input type='file' onChange={cambioImaxen} />
+      {
+        // ### AGREGO IMAXEN CONVERTIDA
+        // SE NON TEÑO IMAXEN --> <div>Ningunha imaxen seleccionada</div>
+        selecteURL != null ? <img src={selecteURL} /> : <div>Ningunha imaxen seleccionada</div>
+      }
       <h2>Subida de Archivos con React y Hooks</h2>
       <FormularioRexistroUser
        handleFileChange={handleFileChange} 
