@@ -64,9 +64,6 @@ function App() {
     }
   };
 
-
-  
-
   return (
     <div className='estilo-wrapper'>
     <label>
