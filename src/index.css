@@ -139,6 +139,14 @@ input[type="text"]::placeholder {
   color: #999;
 }
 
+input[type="file"] {
+  display: none;
+   position: absolute;
+  opacity: 0;
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+}
 button {
   width: 100%;
   padding: 12px;
@@ -154,4 +162,7 @@ button {
 
 button:hover {
   background-color: #e63946;
+}
+.input-transparente {
+  display: none;
 }

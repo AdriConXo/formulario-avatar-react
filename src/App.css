@@ -65,6 +65,11 @@ input[type="text"]::placeholder {
 
 input[type="file"] {
   display: none;
+   position: absolute;
+  opacity: 0;
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
 }
 
 /* ============ BOTÓN ============ */
@@ -83,4 +88,9 @@ button {
 
 button:hover {
   background-color: #e63946;
+}
+
+
+.oculto {
+  display: none;
 }

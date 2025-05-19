@@ -9,12 +9,13 @@ function App() {
  
  
 
-  const cambioImaxen = (event: React.ChangeEvent<HTMLInputElement>) =>{
-    if (event.target.files?.[0]) {
-     // AGREGO IMAXEN CONVERTIDA
-      setSelectedURL(URL.createObjectURL(event.target.files[0]));
-    }
+  const cambioImaxen = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const file = event.target.files?.[0];
+  if (file) {
+    setSelectedFile(file);
+    setSelectedURL(URL.createObjectURL(file));
   }
+};
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
    
     if (event.target.files?.[0]) {
@@ -46,7 +47,6 @@ function App() {
       console.log("key e value",key,value)
       formData.append(key, value);
     });
-
     try {
       setIsUploading(true);
       const response = await fetch('http://localhost:8080/profile', {
@@ -63,17 +63,27 @@ function App() {
       setIsUploading(false);
     }
   };
-
   return (
     <div className='estilo-wrapper'>
-    <label>
-      {
-        // ### AGREGO IMAXEN CONVERTIDA
-        // SE NON TEÑO IMAXEN --> <div>Ningunha imaxen seleccionada</div>
-        selecteURL != null ? <img src={selecteURL} /> : <div><img src={iconoUser}/><div>Selecciona unha imaxen</div></div>
-      }
-      <input className="input-transparente" type='file' onChange={cambioImaxen} />
-    </label>
+  <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}>
+  <img
+    src={selecteURL || iconoUser}
+    alt="avatar"
+    style={{
+      width: '150px',
+      height: '150px',
+      borderRadius: '50%',
+      border: '2px solid red',
+      objectFit: 'cover',
+    }}
+  />
+  <div style={{ marginTop: '10px', color: 'white' }}>Selecciona unha imaxen</div>
+  <input
+    type="file"
+    className="input-transparente"
+    onChange={cambioImaxen}
+  />
+</label>
       
       {/* <h2>Subida de Archivos con React y Hooks</h2> */}
       <FormularioRexistroUser
